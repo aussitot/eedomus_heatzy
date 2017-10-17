@@ -26,7 +26,8 @@ function heatzy_login($login, $password, $appid) {
   $return = curl_exec($curl); //Il suffit ensuite d'exécuter la requête
   curl_close($curl);
 
-  return $return;
+  $obj = json_decode($return);
+  return $obj->{'token'}; // 12345
 }
 
 //*************   Récupération did (identifiant de l'appareil (validité permanente))
@@ -42,12 +43,15 @@ function heatzy_bindings($token, $appid) {
   $return = curl_exec($curl); //Il suffit ensuite d'exécuter la requête
   curl_close($curl);
 
-  return $return;
+  $obj = json_decode($return,true);
+  return $obj;
+  //return $obj['devices'][0]['did'];
 }
 
 
 $token = heatzy_login($heatzy_username,$heatzy_password,$heatzy_application_id );
-echo $token;
+echo "token : ".$token."<br>";
 $did = heatzy_bindings($token,$heatzy_application_id);
-echo $did;
+//echo "did : ".$did."<br>";
+print_r($did);
  ?>
