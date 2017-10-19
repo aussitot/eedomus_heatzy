@@ -2,8 +2,18 @@
 error_reporting(E_ALL);
 ini_set("display_errors", 1);
 
+/*
+script cree par twitter:@Havok pour la eedomus
+
+------------------- Parametres :
+mode = did - Récupération des identifiants did des appareils
+*/
+
 define('__ROOT__', dirname(dirname(__FILE__)));
 require_once ('config.php');
+
+//-------------- Parametres
+$mode = $_GET['mode'];
 
 //*************   Récupération du token, validité 7 jours
 // POST /app/login (User login)
@@ -44,14 +54,29 @@ function heatzy_bindings($token, $appid) {
   curl_close($curl);
 
   $obj = json_decode($return,true);
-  return $obj;
+
+  reset($obj['devices']);
+  $result = "<table border='1'><t<thead><tr><th>N°</th><th>Nom</th><th>@Mac</th><th>did</th></tr></thead><tbody>";
+  while ($i = current($obj['devices']))
+  {
+    $result .= "<tr>";
+    $result .=  "<td>".key($obj['devices'])."</td>";
+    $result .=  "<td>".$obj['devices'][key($obj['devices'])]['dev_alias']."</td>";
+    $result .=  "<td>".$obj['devices'][key($obj['devices'])]['mac']."</td>";
+    $result .=  "<td>".$obj['devices'][key($obj['devices'])]['did']."</td>";
+    next($obj['devices']);
+    $result .= "</tr>";
+  }
+  $result .= "</tbody></table>";
+
+  return $result;
   //return $obj['devices'][0]['did'];
 }
 
-
-$token = heatzy_login($heatzy_username,$heatzy_password,$heatzy_application_id );
-echo "token : ".$token."<br>";
-$did = heatzy_bindings($token,$heatzy_application_id);
-//echo "did : ".$did."<br>";
-print_r($did);
+if ($mode == 'did') {
+  /* récupération du token */
+  $token = heatzy_login($heatzy_username,$heatzy_password,$heatzy_application_id );
+  $did = heatzy_bindings($token,$heatzy_application_id);
+  echo $did;
+}
  ?>
