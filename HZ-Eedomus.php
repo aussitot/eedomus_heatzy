@@ -205,5 +205,6 @@ if (isset($mode) && $mode == 'did') {
 } else {
   $status = heatzy_getstatus($did,$heatzy_application_id); //récupération du status actuel
   echo heatzy_eedomusstatus($status); //mise en forme du xml pour eedomus
+  error_log(date("d-m-Y H:i:s").' remote_ip: '.$_SERVER['REMOTE_ADDR']."\n", 3, "HZ.log");
 }
  ?>
