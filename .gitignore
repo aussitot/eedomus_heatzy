@@ -39,3 +39,7 @@ Thumbs.db
 # Config File #
 ######################
 config.php
+
+# Test File #
+#####################
+HZ-Eedomus-test.php

@@ -1,0 +1,76 @@
+{
+	"plugin_id": "heatzy_pilote",
+  "name_fr": "Heatzy Pilote",
+	"icon": "heatzy.png",
+	"version": "1.0",
+	"creation_date": "2017-11-03",
+	"modification_date": "2017-11-03",
+	"author": "<a href='http://www.aussitot.net/' target='_blank'>@havok</a>",
+	"description_fr": "Gestion des modules de contrôle des radiateurs électriques <a href='https://heatzy.com/pilote/' target='_blank'>Heatzy Pilote</a>",
+	"description_en": "",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+  "forum_link": "http://forum.eedomus.com/viewtopic.php?f=50&t=6026",
+  "parameters":
+  [
+		{
+			"parameter": "heatzy_login", 
+			"description": "Identifiant de votre compte Heatzy",
+			"xtype": "textfield",
+			"default_value": "",
+			"field": "width:130, allowBlank:false"
+    },
+    {
+      "parameter": "heatzy_password", 
+      "description": "Password de votre compte Heatzy",
+      "xtype": "textfield",
+			"default_value": "",
+			"field": "width:130, allowBlank:false"
+    },
+    {
+      "parameter": "module_name", 
+      "description": "Nom de votre module Heatzy Pilote",
+      "xtype": "textfield",
+			"default_value": "",
+			"field": "width:130, allowBlank:false"
+    }
+  ],
+	"scripts":
+	[
+		{
+			"name": "heatzypilote.php"
+		}
+	],
+  "devices":
+  [
+		{
+			"device_id": "heatzy_pilote",
+			"module_id": "41",
+			"type": "http",
+			"name": "plugin.name",
+			"icon": "heatzy.png",
+			"value_type": "list",
+			"utilisation_id": "43",
+			"parameters":
+			{
+				"VAR1": "plugin.parameters.heatzy_login",
+				"VAR2": "plugin.parameters.heatzy_password",
+				"VAR3": "plugin.parameters.module_name",
+				"value_type": "list",
+				"ignore_errors": 3,
+				"RAW_URL": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]",
+				"RAW_XPATH": "/root/status/value",
+				"POLLING": "30"
+			},
+			"values":
+			[
+				{ "value": "0", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=0", "description": "Confort", "icon": "chauffage.png" },
+				{ "value": "1", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=1", "description": "Eco", "icon": "chauffage_m2.png" },
+				{ "value": "2", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=2", "description": "Hors-Gel", "icon": "chauffage_hg.png" },
+				{ "value": "3", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=3", "description": "Off", "icon": "chauffage_off.png" }
+		]
+
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+//error_reporting(E_ALL);
+//ini_set("display_errors", 1);
 
 /*
 script cree par twitter:@Havok pour la eedomus
@@ -13,7 +13,7 @@ device = nom du module heatzy
 mode = set - Modification de l'etat de l'appareil
   ordre = 0 confort/ 1 eco/ 2 hors-gel/ 3 off
 */
-require 'eedomus.lib.php';
+//require 'eedomus.lib.php';
 
 //--- Paramètres Script
 $heatzy_application_id = "c70a66ff039d41b4a220e198b0fcc8b3";
@@ -49,6 +49,15 @@ function sdk_heatzy_getdidbyname($token, $appid, $devicename) {
   $obj = sdk_json_decode($return);
   //print_r($obj);
 
+  foreach($obj['devices'] as $device) {
+    if (strtolower(trim($device['dev_alias'])) == strtolower(trim($devicename))) {
+      $did = $device['did'];
+      saveVariable('did-'.strtolower(trim($devicename)),$did);
+      return $did;
+    }
+  }
+
+/*
   while ($i = current($obj['devices']))
   {
     if (strtolower(trim($obj['devices'][key($obj['devices'])]['dev_alias'])) == strtolower(trim($devicename))) {
@@ -58,6 +67,7 @@ function sdk_heatzy_getdidbyname($token, $appid, $devicename) {
     }
     next($obj['devices']);
   }
+*/
 }
 
 
