@@ -2,21 +2,24 @@
 Gestion des modules Heatzy dans la eedomus
 script cree par twitter:@Havok pour la eedomus
 
-NB : Script à installer sur un serveur web/php autre que l'eedomus elle-même
-
-# INSTALLATION
-Bonjour,
-
 Voici un  script pour intégrer dans l'interface eedomus les chauffages électriques pilotés par des modules Heatzy
-A notez que ce script php peut être utilisé pour autre chose que la eedomus.
-
-**Prérequis** : Il faut disposer d'un serveur web/php autre que l'eedomus elle-même.  
-
 **Ce que ca fait** : Ca va vous permettre de
 - changer l'etat des radiateurs
 - mettre à jour régulierement l'etat de ceux-ci dans l'interface eedomus (en cas de changements programmés dans l'appli Heatzy)
 
-## Etape 1
+2 versions
+# version_store_eedomus
+
+Cette version est intégrée directement au store eedomus. Il suffit, à partir de l'interface eedomus, d'aller dans "Configuration/Ajouter ou supprimer un périphérique/Store eedomus" de choisir "Heatzy Pilote" et de remplir les champs requis. 
+
+# version_serveur_web
+A notez que ce script php peut être utilisé pour autre chose que la eedomus.
+
+## INSTALLATION
+
+**Prérequis** : Il faut disposer d'un serveur web/php autre que l'eedomus elle-même.  
+
+### Etape 1
 - Copiez le fichier HZ-eedomus.php sur votre serveur.
 - Modifiez le pour y reporter vos login et password Heatzy
 
@@ -25,10 +28,10 @@ A notez que ce script php peut être utilisé pour autre chose que la eedomus.
 $heatzy_username = "";
 $heatzy_password = "";
 ```
-## Etape 2
+### Etape 2
 Dans un navigateur tapez l'url : ```http://www.votreserveur.com/HZ-Eedomus.php?mode=did``` et récupérer la valeur **did** correspondant au radiateur que vous souhaitez piloter dans l'eedomus
 
-## Etape 3
+### Etape 3
 Dans eedomus créez un Actionneur http :
 - Nom : Chauffage Heatzy (ou ce que vous voulez ;)
 - [VAR1] : le **did** récupéré à l'étape 2
@@ -58,7 +61,3 @@ Dans l'onglet Valeurs :
 - description : Off
 - URL : ```http://www.votreserveur.com/HZ-Eedomus.php?mode=set&ordre=3&did=[VAR1]```
 - Type : GET
-
-Et c'est tout.
-Si j'ai le courage je tenterais un script intégré au Store eedomus.
-Bonne chance (Anne-marie tu peux le faire !)
