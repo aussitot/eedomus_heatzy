@@ -59,14 +59,14 @@
 				"VAR3": "plugin.parameters.module_name",
 				"value_type": "list",
 				"ignore_errors": 3,
-				"RAW_URL": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]",
+				"RAW_URL": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=get&ordre=99",
 				"RAW_XPATH": "/root/status/value",
 				"POLLING": "30"
 			},
 			"values":
 			[
 				{ "value": "0", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=0", "description": "Confort", "icon": "chauffage.png" },
-				{ "value": "1", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=1", "description": "Eco", "icon": "chauffage_m2.png" },
+				{ "value": "1", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=1", "description": "Eco", "icon": "chauffage_eco.png.png" },
 				{ "value": "2", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=2", "description": "Hors-Gel", "icon": "chauffage_hg.png" },
 				{ "value": "3", "http_url": "http://localhost/script/?exec=heatzypilote.php&user=[VAR1]&pass=[VAR2]&device=[VAR3]&mode=set", "http_type": "GET", "http_params": "&ordre=3", "description": "Off", "icon": "chauffage_off.png" }
 		]
