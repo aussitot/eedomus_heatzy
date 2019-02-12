@@ -117,16 +117,16 @@ function heatzy_getstatus($diditem, $appid) {
 
   $etatch = $obj['attr']['mode'];
   switch ($etatch) {
-    case '舒适':
+    case '\u8212\u9002':
       $etat = 0; // 'confort';
       break;
-    case '停止':
+    case '\u505c\u6b62':
       $etat = 3; //'off';
       break;
-    case '经济':
+    case '\u7ecf\u6d4e':
       $etat = 1; //'eco';
       break;
-    case '解冻':
+    case '\u89e3\u51bb':
       $etat = 2; //'hors-gel';
       break;
     default:
