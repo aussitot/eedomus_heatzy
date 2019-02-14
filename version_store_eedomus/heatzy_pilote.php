@@ -3,7 +3,7 @@
 /*
 script cree par twitter:@Havok pour la eedomus
 
-------------------- Parametres :
+-------------------- Parametres :
 
 user = login du compte heatzy_username
 pass = password du compte heatzy_username
@@ -36,6 +36,14 @@ function sdk_heatzy_login($login, $password, $appid) {
   return $obj['token'];
 }
 
+function sdk_clean_variable_name($name)
+{
+	$name = strtolower($name);
+	$name = trim($name);
+	$name = str_replace(' ', '_', $name);
+	$name = strtr($name,'àáâãäçèéêëìíîïñòóôõöùúûüýÿ','aaaaaceeeeiiiinooooouuuuyy');
+	return $name;
+}
 
 //*************   Récupération did (identifiant de l'appareil (validité permanente)) en fonction du nom de l'appareil
 // GET /app/bindings
@@ -47,15 +55,14 @@ function sdk_heatzy_getdidbyname($token, $appid, $devicename) {
   //print_r($obj);
 
   foreach($obj['devices'] as $device) {
-    if (strtolower(trim($device['dev_alias'])) == strtolower(trim($devicename))) {
+    if (sdk_clean_variable_name($device['dev_alias']) == sdk_clean_variable_name($devicename)) {
       $did = $device['did'];
-      saveVariable('did-'.strtolower(trim($devicename)),$did);
+      saveVariable('did-'.sdk_clean_variable_name($devicename), $did);
       return $did;
     }
   }
 
 }
-
 
 //*************   Récupération de l'etat de l'appareil
 // GET /app/devdata/{did}/latest
@@ -67,7 +74,7 @@ function sdk_heatzy_getstatus($diditem, $appid) {
   //print_r($obj);
 
   $etatch = $obj['attr']['mode'];
-  
+
   switch ($etatch) {
     case '\u8212\u9002':
       $etat = 0; // 'confort';
@@ -143,8 +150,8 @@ if (isset($mode) && $mode == 'set') {
     $token = sdk_heatzy_login($heatzy_username,$heatzy_password,$heatzy_application_id ); // récupération du token
   }
 
-  if (loadVariable('did-'.strtolower(trim($heatzy_devicename))) != '') { // récupération du did
-    $did = loadVariable('did-'.strtolower(trim($heatzy_devicename)));
+  if (loadVariable('did-'.sdk_clean_variable_name($heatzy_devicename)) != '') { // récupération du did
+    $did = loadVariable('did-'.sdk_clean_variable_name($heatzy_devicename));
   } else {
     $did = sdk_heatzy_getdidbyname($token,$heatzy_application_id,$heatzy_devicename);
   }
@@ -159,13 +166,14 @@ if (isset($mode) && $mode == 'set') {
     $token = sdk_heatzy_login($heatzy_username,$heatzy_password,$heatzy_application_id ); // récupération du token
   }
 
-  if (loadVariable('did-'.strtolower(trim($heatzy_devicename))) != '') { // récupération du did
-    $did = loadVariable('did-'.strtolower(trim($heatzy_devicename)));
+  if (loadVariable('did-'.sdk_clean_variable_name($heatzy_devicename)) != '') { // récupération du did
+    $did = loadVariable('did-'.sdk_clean_variable_name($heatzy_devicename));
   } else {
     $did = sdk_heatzy_getdidbyname($token,$heatzy_application_id,$heatzy_devicename);
   }
 
   $status = sdk_heatzy_getstatus($did,$heatzy_application_id); //récupération du status actuel
+  sdk_header('text/xml');
   echo sdk_heatzy_eedomusstatus($status); //mise en forme du xml pour eedomus
 }
  ?>
