@@ -1,4 +1,4 @@
-[![GitHub release](https://img.shields.io/github/release/aussitot/eedomus_enedis.svg?style=flat-square)](https://github.com/aussitot/eedomus_heatzy/releases)
+[![GitHub release](https://img.shields.io/github/release/aussitot/eedomus_heatzy.svg?style=flat-square)](https://github.com/aussitot/eedomus_heatzy/releases)
 ![GitHub license](https://img.shields.io/github/license/aussitot/eedomus_enedis.svg?style=flat-square)
 ![Status](https://img.shields.io/badge/Status-beta-red.svg?style=flat-square)
 [![Twitter](https://img.shields.io/badge/twitter-@havok-blue.svg?style=flat-square)](http://twitter.com/havok)
